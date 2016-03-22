@@ -97,7 +97,7 @@ router.delete("/:id", function(req, res) {
 router.get("/today",function(res,req,next){
   var startOfToday = new Date().now();
   var endOfToday = new Date().now();
-Reservations.find({time:{'$gte':startOfToday,'$lte':endOfToday}},function(err,data){
+Reservations.find({resTime:{'$gte':startOfToday,'$lte':endOfToday}},function(err,data){
   if(err){
     res.status(400).send(err);
   }
