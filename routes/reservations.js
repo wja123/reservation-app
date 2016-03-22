@@ -31,7 +31,7 @@ router.get("/:id", function(req, res) {
 
 router.get("/name/:patronName", function(req, res) {
     Reservations.find({
-        patronName: req.params.patronName
+        patronName: new RegExp(req.params.patronName,'i')
     }, function(err, data) {
         if (err) {
             res.status(400).send(err);

@@ -6,3 +6,11 @@ body {
 a {
   color: #00B7FF;
 }
+
+.resButton{
+text-align: center;
+}
+.resButton:hover{
+cursor: pointer;
+background-color: lightblue;
+}

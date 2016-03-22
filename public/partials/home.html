@@ -8,7 +8,8 @@
       <td>Allergies</td>
       <td>Phone</td>
       <td>Checked In</td>
-      <td>Update</td>
+      <td>Edit</td>
+      <td>Delete</td>
     </tr>
   </thead>
   <tbody >
@@ -16,7 +17,7 @@
       <td>
         {{res.resTime | date:'mediumDate'}}
       </td>
-            <td>
+      <td>
         {{res.resTime | date:'shortTime'}}
       </td>
       <td>
@@ -31,11 +32,14 @@
       <td>
         {{res.phoneNumber}}
       </td>
-      <td>
+      <td class ="resButton">
         <input type="checkbox" ng-value="res.checkedIn" ng-model="res.checkedIn" ng-change="resCheckIn(this)">
       </td>
-      <td ng-click="editResInfo(this)">
-        Edit
+      <td class ="resButton" ng-click="editResInfo(this)">
+        <span class="glyphicon glyphicon-edit"></span>
+      </td>
+      <td class ="resButton" ng-click="deleteResInfo(this)">
+        <span class="glyphicon glyphicon-remove"></span>
       </td>
     </tr>
   </tbody>

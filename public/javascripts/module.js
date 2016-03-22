@@ -13,9 +13,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: "/editRes",
             templateUrl: "partials/edit.html",
             controller: "resCtrl",
-            params: {res:null}
+            params: {
+                res: null
+            }
         })
 
-        $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/");
 
 });
