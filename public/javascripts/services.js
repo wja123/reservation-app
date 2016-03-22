@@ -49,7 +49,7 @@ app.service("addService", function($http) {
 
     this.addRes = (reserv) => {
         $http.post('/reservations', reserv).then(res => {
-            this.resList.push(res.data);
+            this.getAllRes();
         }, err => {
             if (err) {
                 console.log(err);
