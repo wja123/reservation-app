@@ -42,8 +42,6 @@ app.controller('mainCtrl', function($scope, $state, addService) {
         addService.delRes(inp.res._id);
     }
 
-
-
 });
 
 app.controller("resCtrl", function($scope, $state, addService) {
@@ -60,7 +58,12 @@ app.controller("resCtrl", function($scope, $state, addService) {
         $scope.editRes = newRes;
     }
     $scope.updateRes = function(inp) {
-        if ($state.params.res) {} else {
+        if ($state.params.res) {
+            var addValue = angular.copy(inp);
+            addService.updateResById(addValue);
+            $state.go('resList');
+
+        } else {
             var addValue = angular.copy(inp);
             addService.addRes(addValue);
             $state.go('resList');

@@ -54,26 +54,13 @@ router.get("/date/:resTime", function(req, res) {
 });
 
 router.put("/:id", function(req, res) {
-    Reservations.findById({
-        _id: req.params.id
-    }, function(err, data) {
+    Reservations.findByIdAndUpdate(req.params.id, {$set:req.body}, {new:true},function(err, data) {
         if (err) {
             res.status(400).send(err);
             return;
         }
-        data.resTime = req.body.resTime;
-        data.patronName = req.body.patronName;
-        data.partySize = req.body.partySize;
-        data.allergies = req.body.allergies;
-        data.checkedIn = req.body.checkedIn;
-        data.phoneNumber = req.body.phoneNumber;
-        data.save(function(err) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-            res.send(data);
-        });
+            res.status(200).send(data);
+        
     });
 });
 
@@ -107,5 +94,14 @@ router.delete("/:id", function(req, res) {
     });
 });
 
-
+router.get("/today",function(res,req,next){
+  var startOfToday = new Date().now();
+  var endOfToday = new Date().now();
+Reservations.find({time:{'$gte':startOfToday,'$lte':endOfToday}},function(err,data){
+  if(err){
+    res.status(400).send(err);
+  }
+  res.send(data);
+});
+});
 module.exports = router;
