@@ -9,7 +9,6 @@ app.controller('navCtrl', function($scope, $state, addService) {
         }
     }
 
-
 });
 
 app.controller('mainCtrl', function($scope, $state, addService) {

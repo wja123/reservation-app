@@ -31,7 +31,7 @@ router.get("/:id", function(req, res) {
 
 router.get("/name/:patronName", function(req, res) {
     Reservations.find({
-        patronName: new RegExp(req.params.patronName,'i')
+        patronName: new RegExp(req.params.patronName, 'i')
     }, function(err, data) {
         if (err) {
             res.status(400).send(err);
@@ -54,13 +54,17 @@ router.get("/date/:resTime", function(req, res) {
 });
 
 router.put("/:id", function(req, res) {
-    Reservations.findByIdAndUpdate(req.params.id, {$set:req.body}, {new:true},function(err, data) {
+    Reservations.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    }, {
+        new: true
+    }, function(err, data) {
         if (err) {
             res.status(400).send(err);
             return;
         }
-            res.status(200).send(data);
-        
+        res.status(200).send(data);
+
     });
 });
 
@@ -94,14 +98,38 @@ router.delete("/:id", function(req, res) {
     });
 });
 
-router.get("/today",function(res,req,next){
-  var startOfToday = new Date().now();
-  var endOfToday = new Date().now();
-Reservations.find({resTime:{'$gte':startOfToday,'$lte':endOfToday}},function(err,data){
-  if(err){
-    res.status(400).send(err);
-  }
-  res.send(data);
+router.get("/res/today", function(req, res, next) {
+    var startOfToday = moment().startOf('day').toDate();
+    var endOfToday = moment().endOf('day').toDate();
+    Reservations.find({
+        resTime: {
+            '$gte': startOfToday,
+            '$lte': endOfToday
+        }
+    }, function(err, data) {
+        if (err) {
+            res.status(400).send(err);
+        }
+        res.send(data);
+    });
 });
+
+router.get("/res/upcoming", function(req, res) {
+    var anHourAgo = moment().subtract(1, 'hour').toDate();
+    var endOfToday = moment().endOf('day').toDate();
+
+    Reservations.find({
+        resTime: {
+            '$gte': anHourAgo,
+            '$lte': endOfToday
+        },
+        checkedIn: false
+    }, function(err, data) {
+        if (err) {
+            return res.status(400).send(err);
+        }
+        res.send(data);
+    });
 });
+
 module.exports = router;
