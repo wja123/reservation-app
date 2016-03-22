@@ -27,8 +27,8 @@ app.controller('mainCtrl', function($scope, $state, addService) {
     });
 
     $scope.resCheckIn = function(inp) {
-        addService.updateResById(inp.res);
-        updateList();
+        addService.updateResById(angular.copy(inp.res));
+        addService.getAllRes();
     }
 
     $scope.editResInfo = function(inp) {
@@ -36,7 +36,6 @@ app.controller('mainCtrl', function($scope, $state, addService) {
             res: inp.res
         });
     }
-
 
     $scope.deleteResInfo = function(inp) {
         console.log(inp.res._id);

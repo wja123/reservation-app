@@ -39,7 +39,7 @@ app.service("addService", function($http) {
 
     this.updateResById = (data) => {
         $http.put(`/reservations/${data._id}`, data).then(res => {
-            console.log("successfully updated");
+            this.getAllRes();
         }, err => {
             if (err) {
                 console.log(err);
