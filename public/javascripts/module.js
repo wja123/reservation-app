@@ -4,15 +4,16 @@ var app = angular.module("myApp", ['ui.router', 'angularMoment']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state("home", {
+        .state("resList", {
             url: "/",
-            templateUrl: "/home.html",
+            templateUrl: "partials/home.html",
             controller: "mainCtrl"
         })
-        .state("resList", {
-            url: "/resList",
-            templateUrl: "/reservations.html",
-            controller: "resCtrl"
+        .state("editRes", {
+            url: "/editRes",
+            templateUrl: "partials/edit.html",
+            controller: "resCtrl",
+            params: {res:null}
         })
 
         $urlRouterProvider.otherwise("/");

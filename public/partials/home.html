@@ -1,0 +1,43 @@
+<table class ="table" ng-controller="mainCtrl">
+  <thead>
+    <tr>
+      <td>Date</td>
+      <td>Time</td>
+      <td>Name</td>
+      <td>Party Size</td>
+      <td>Allergies</td>
+      <td>Phone</td>
+      <td>Checked In</td>
+      <td>Update</td>
+    </tr>
+  </thead>
+  <tbody >
+    <tr ng-repeat ="res in resList track by $index">
+      <td>
+        {{res.resTime | date:'mediumDate'}}
+      </td>
+            <td>
+        {{res.resTime | date:'shortTime'}}
+      </td>
+      <td>
+        {{res.patronName}}
+      </td>
+      <td>
+        {{res.partySize}}
+      </td>
+      <td>
+        {{res.allergies}}
+      </td>
+      <td>
+        {{res.phoneNumber}}
+      </td>
+      <td>
+        <input type="checkbox" ng-value="res.checkedIn" ng-model="res.checkedIn" ng-change="resCheckIn(this)">
+      </td>
+      <td ng-click="editResInfo(this)">
+        Edit
+      </td>
+    </tr>
+  </tbody>
+  
+</table>
